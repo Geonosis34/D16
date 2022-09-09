@@ -14,6 +14,13 @@
       <p class="card-text ">{{ post.text}}</p>
       {%endif%}
     </div>
+      <tr>
+      <td>{{ post.dateCreation|date:'d M Y' }}</td>
+        <hr>
+      <td>{{ post.author }}</td>
+        <hr>
+      <td>{{ post.category }}</td>
+      </tr>
 
   </div>
 </div>

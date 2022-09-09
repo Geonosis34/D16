@@ -12,7 +12,7 @@ class Post(models.Model):
     dateCreation = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return f'/desk/{self.id}'
+        return f'/gamedesk/{self.id}'
 
     def __str__(self):
         return f'{self.title.title()}: {self.text[:20]}'

@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-#from .forms import PostCreateForm
+from .forms import PostForm
 from .models import *
 
 
-#@admin.register(Post)
-#class PostAdmin(admin.ModelAdmin):
-    #form = PostCreateForm
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    form = PostForm
 
-admin.site.register(Post)
+#admin.site.register(Post)
 admin.site.register(Category)
 admin.site.register(Comment)

@@ -1,0 +1,21 @@
+{% extends 'default.html' %}
+
+{% load custom_tags %}
+{% block title %}
+Detail
+{% endblock title %}
+
+{% block content %}
+<h2><u>Detail</u></h2>
+<h3>{% current_time '%d %b %Y' %}</h3>
+<p><h3>{{ post_detail.title }}</h3></p>
+<p><u>{{ post_detail.dateCreation|date:'d-m-Y H:i' }}</u></p>
+<p>{{ post_detail.text }}</p>
+<p>{{ post_detail.author }}</p>
+<p>{{ post_detail.category }}</p>
+<hr>
+<a href="{% url 'post_update' post_detail.id %}"><u> Редактировать запись</u><a/>
+<hr>
+<a href="{% url 'post_delete' post_detail.id %}"><u> Удалить запись</u><a/>
+<hr>
+{% endblock content %}
