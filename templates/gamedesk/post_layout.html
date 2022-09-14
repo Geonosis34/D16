@@ -2,10 +2,32 @@
   <div class="card p-2">
     <div class="card-header">
       <h3 class="card-title">
-
+        <a class="navbar-brand" href="{% url 'post_detail' post.pk %}">
           {{ post.title }}
-
+        </a>
       </h3>
+      <a class="navbar-brand" href="{% url 'category' post.category.name %}">
+        <span class="badge bg-secondary float-end">{{ post.category }}</span>
+      </a>
+      <small class="text-muted ms-1">
+        <b>
+          published by:
+        </b>
+        <span class="fst-italic">
+        </span>
+        <a href="{% url 'by_author' post.author %}">
+          <span class="fst-italic">{{ post.author }}</span>
+        </a>
+        <b>
+          on:
+        </b>
+        <span class="fst-italic">
+          {{ post.dateCreation}}
+        </span>
+        </p>
+
+      </small>
+    </div>
 
     <div class="card-body">
       {% if post_list or posts %}
@@ -13,14 +35,37 @@
       {% else %}
       <p class="card-text ">{{ post.text}}</p>
       {%endif%}
-    </div>
-      <tr>
-      <td>{{ post.dateCreation|date:'d M Y' }}</td>
-        <hr>
-      <td>{{ post.author }}</td>
-        <hr>
-      <td>{{ post.category }}</td>
-      </tr>
 
+    </div>
+
+    <div class="card-footer">
+
+      {% if user.is_authenticated and post in user.post_set.all %}
+      <a class="text-decoration-none" href="{% url 'comments_list' post.pk %}">
+        <button type="button" class="btn btn-outline-primary position-relative ">
+          Responses
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ post.comment_set.all|length }}
+          </span>
+        </button>
+      </a>
+      <a class="text-decoration-none" href="{% url 'post_update' post.pk %}">
+        <button class="btn btn-outline-warning text-dark">
+          Edit
+        </button>
+      </a>
+      <a href="{% url 'post_delete' post.pk %}">
+        <button class="btn btn-outline-danger">
+          Delete
+        </button>
+      </a>
+      {% else %}
+      <a class="text-decoration-none" href="{% url 'comment_create' post.pk %}">
+        <button class="btn btn-outline-info">
+          Respond
+        </button>
+      </a>
+      {% endif %}
+    </div>
   </div>
 </div>
